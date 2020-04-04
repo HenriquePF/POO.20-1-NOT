@@ -60,4 +60,64 @@ class TesteVetorDeReais {
 
 		assertEquals(10.0, objV1.getMaiorDiferenca());
 	}
+	
+	
+	// Solução do exercício 12 - Lista 2
+	@Test
+    void testCaso1()  {
+        VetorDeReais obj1 = new VetorDeReais(3);
+        obj1.setValor(2, 0);
+        obj1.setValor(-1, 1);
+        obj1.setValor(3.5, 2);
+        VetorDeReais obj2 = new VetorDeReais(1);
+        obj2.setValor(3, 0);
+        assertNull(obj1.divide(obj2));
+    }
+
+	@Test
+    void testCaso2()  {
+        VetorDeReais obj1 = new VetorDeReais(3);
+        obj1.setValor(2, 0);
+        obj1.setValor(-1, 1);
+        obj1.setValor(3.5, 2);
+        VetorDeReais obj2 = new VetorDeReais(3);
+        obj2.setValor(3, 0);
+        obj2.setValor(2, 1);
+        obj2.setValor(1, 2);
+        VetorDeReais objRes = obj1.divide(obj2);
+        assertEquals(3.5, objRes.getValor(2));
+        assertEquals(-0.5, objRes.getValor(1));
+        assertEquals(0.6666666, objRes.getValor(0), 0.000001);
+    }
+	
+	@Test
+    void testCaso2A()  {
+        VetorDeReais obj1 = new VetorDeReais(3);
+        obj1.setValor(2, 0);
+        obj1.setValor(-1, 1);
+        obj1.setValor(3.5, 2);
+        VetorDeReais obj2 = new VetorDeReais(3);
+        obj2.setValor(3, 0);
+        obj2.setValor(2, 1);
+        obj2.setValor(1, 2);
+        VetorDeReais objRes = obj1.divide(obj2);
+        assertEquals("[0.6666666666666666, -0.5, 3.5]", objRes.exibe());
+    }
+	
+	@Test
+    void testCaso2B()  {
+        VetorDeReais obj1 = new VetorDeReais(3);
+        obj1.setValor(2, 0);
+        obj1.setValor(-1, 1);
+        obj1.setValor(3.5, 2);
+        VetorDeReais obj2 = new VetorDeReais(3);
+        obj2.setValor(3, 0);
+        obj2.setValor(2, 1);
+        obj2.setValor(1, 2);
+        VetorDeReais objRes = obj1.divide(obj2);
+        double[] vetor = {0.666666 , -0.5 , 3.5};
+        for (int i=0; i < vetor.length; i++) {
+        	assertEquals(vetor[i], objRes.getValor(i),0.00001);	
+        }
+    }	
 }
