@@ -35,7 +35,7 @@ public class InteiroPositivo {
 
 	// item d
 	public String divisoresInteiros() {
-		String retorno = "Divisores inteiros: ";
+		String retorno = "Os divisores são ";
 		int contador=0;
 		for (int num = 1; num <= this.x; num++) {
 			if (this.x % num == 0) { // num é um divisor inteiro
