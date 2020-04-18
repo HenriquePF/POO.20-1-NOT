@@ -34,4 +34,16 @@ public class Obra {
 		this.autor = autor;
 	}
 
+	public String mostra() {
+		String resultado = "Obra: "+this.titulo
+							+"\nAutor: "+this.autor
+							+"\nPareceres:"+this.indice;
+		for (int i=0; i < this.indice; i++) {
+			resultado += "\n"+(i+1)+": Parecerista:"+this.pareceres[i].getNomeParecerista()
+							+"\n\tData:"+this.pareceres[i].getData()
+							+"\n\tConteúdo:"+this.pareceres[i].getConteudo();
+		}
+		return resultado;
+	}
+
 }
