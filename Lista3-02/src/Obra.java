@@ -10,6 +10,10 @@ public class Obra {
 			this.pareceres[this.indice] = p;
 			this.indice++;
 		}
+		else {
+			IllegalArgumentException exc = new IllegalArgumentException("Não há mais espaço para pareceres.");
+			throw exc;
+		}
 	}
 	
 	public int getQtdePareceres() {
@@ -24,6 +28,9 @@ public class Obra {
 		if (titulo != null && !titulo.isEmpty()) {
 			this.titulo = titulo;
 		}
+		else {
+			throw new IllegalArgumentException("Título da obra inválido");
+		}
 	}
 
 	public String getAutor() {
@@ -31,6 +38,9 @@ public class Obra {
 	}
 
 	public void setAutor(String autor) {
+		if (autor == null || autor.isEmpty()) {
+			throw new IllegalArgumentException("Nome do autor inválido");
+		}
 		this.autor = autor;
 	}
 
