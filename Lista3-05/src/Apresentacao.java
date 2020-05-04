@@ -2,6 +2,7 @@
 import java.util.List;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 /**
@@ -46,15 +47,29 @@ public class Apresentacao extends javax.swing.JFrame {
 		jButton3 = new javax.swing.JButton();
 		jButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// VereadorMenorDesempenho
-
+				Vereador v = camara.getVereadorMenorDesempenho();
+				String str;
+				if (v == null) {
+					str = "Não há vereadores cadastrados";
+				} else {
+					str = "Menor desempenho\n\n" + v.getNome() + " do partido " + v.getPartido().getNome() + " = "
+							+ v.getDesempenho();
+				}
+				JOptionPane.showMessageDialog(jTabbedPane1, str);
 			}
 		});
 		jButton4 = new javax.swing.JButton();
 		jButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// VereadorMaisProjAprov
-
+				Vereador v = camara.getVereadorMaisProjAprov();
+				String str;
+				if (v == null) {
+					str = "Não há vereadores cadastrados";
+				} else {
+					str = "Mais projetos cadastrados\n\n" + v.getNome() + " do partido " + v.getPartido().getNome()
+							+ " = " + v.getDesempenho();
+				}
+				JOptionPane.showMessageDialog(jTabbedPane1, str);
 			}
 		});
 		jLabel9 = new javax.swing.JLabel();
@@ -62,7 +77,20 @@ public class Apresentacao extends javax.swing.JFrame {
 		jButton5 = new javax.swing.JButton();
 		jButton5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				try {
+					Partido p = camara.getPartido(Integer.parseInt(jTextField7.getText()));
+					String str;
+					if (p == null) {
+						str = "Não há partido com este número";
+					} else {
+						str = "Partido " + p.getNome() + "\n\nTotal de projetos aprovados = " + p.getQtdProjAprov()
+								+ "\nTotal de projetos apresentados = " + p.getQtdProjApres()
+								+ "\nMédia de desempenho do partido = " + p.getMediaDesempenho();
+					}
+					JOptionPane.showMessageDialog(jTabbedPane1, str);
+				} catch (NumberFormatException nfe) {
+					JOptionPane.showMessageDialog(jTabbedPane1, "Digite um número de partido válido");
+				}
 			}
 		});
 		jSeparator1 = new javax.swing.JSeparator();
@@ -248,19 +276,58 @@ public class Apresentacao extends javax.swing.JFrame {
 	}
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-		// Cadastrar partido
+		String str;
+		try {
+			if (camara.getPartido(Integer.parseInt(jTextField1.getText())) == null) {
+				Partido partido = new Partido();
+				partido.setNome(jTextField2.getText());
+				partido.setNumero(Integer.parseInt(jTextField1.getText()));
+				camara.addPartido(partido);
+				str = "Partido cadastrado";
+			} else {
+				str = "Já há partido com este número. Escolha outro número";
+			}
+		} catch (IllegalArgumentException iae) {
+			str = iae.getMessage();
+		}
+		JOptionPane.showMessageDialog(this, str);
 	}
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-		// Cadastrar vereador
+		Partido p = camara.getPartido(Integer.parseInt(jTextField4.getText()));
+		if (p == null) {
+			jLabel8.setText("Número do partido não localizado");
+			jLabel8.setForeground(Color.red);
+		} else {
+			try {
+				jLabel8.setText(p.getNome());
+				jLabel8.setForeground(Color.black);
+				Vereador ver = new Vereador();
+				ver.setNome(jTextField3.getText());
+				ver.setQtdProjApres(Integer.parseInt(jTextField5.getText()));
+				ver.setQtdProjAprov(Integer.parseInt(jTextField6.getText()));
+				p.addVereador(ver);
+				JOptionPane.showMessageDialog(this, "Vereador cadastrado com desempenho " + ver.getDesempenho());
+			} catch (IllegalArgumentException iae) {
+				JOptionPane.showMessageDialog(this, iae.getMessage());
+			}
+		}
 	}
 
 	private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
-
+		int aprov = camara.getTotalProjAprov();
+		int apres = camara.getTotalProjApres();
+		String str = "Total de projetos aprovados = " + aprov + "\nTotal de projetos apresentados = " + apres;
+		JOptionPane.showMessageDialog(this, str);
 	}
 
 	private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
-
+		List<Vereador> acima = camara.getVereadoresAcimaMedia();
+		String str = "Vereadores acima da média (" + camara.getMediaDesempenho() + ")\n";
+		for (Vereador v : acima) {
+			str += "\n" + v.getNome() + " do partido " + v.getPartido().getNome() + " = " + v.getDesempenho();
+		}
+		JOptionPane.showMessageDialog(this, str);
 	}
 
 	/**

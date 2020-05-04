@@ -14,6 +14,10 @@ public class Camara {
 		this.partidos.put(p.getNumero(), p);
 	}
 
+    public Partido getPartido(int numero) {
+        return this.partidos.get(numero);
+    }
+	
 	public int getTotalProjApres() {
 		int total = 0;
 		for (Partido p : this.partidos.values()) {
