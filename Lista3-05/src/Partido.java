@@ -46,6 +46,9 @@ public class Partido {
 	}
 	
 	public double getMediaDesempenho() {
+		if (this.vereadores.isEmpty()) {
+			return 0;
+		}
 		double total = 0;
 		for (Vereador ver: this.vereadores) {
 			total += ver.getDesempenho();

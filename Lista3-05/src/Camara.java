@@ -29,7 +29,7 @@ public class Camara {
 	public int getTotalProjAprov() {
 		int total = 0;
 		for (Partido p : this.partidos.values()) {
-			total += p.getQtdProjApres();
+			total += p.getQtdProjAprov();
 		}
 		return total;
 	}
