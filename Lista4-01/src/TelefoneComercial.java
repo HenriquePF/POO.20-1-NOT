@@ -1,24 +1,33 @@
+import java.time.LocalDate;
 
 public class TelefoneComercial extends Telefone {
 	private String ramoAtividade;
+	private static LocalDate dataBase = LocalDate.of(2017, 01, 01);
+
+	public TelefoneComercial(){
+		
+	}
 	
-	
-	
+	public TelefoneComercial(String nomeUsuario, String ramo, String numero, String endereco, LocalDate data) {
+		super(numero, nomeUsuario, data, endereco);
+		this.setRamoAtividade(ramo);
+	}
+
 	public String getRamoAtividade() {
 		return ramoAtividade;
 	}
-
-
 
 	public void setRamoAtividade(String ramoAtividade) {
 		this.ramoAtividade = ramoAtividade;
 	}
 
-
-
 	@Override
 	public double getValorBasico() {
-		return 27.50;
+		if (this.dataInstalacao.isBefore(dataBase)) {
+			return 25;
+		} else {
+			return 37.50;
+		}
 	}
 
 }

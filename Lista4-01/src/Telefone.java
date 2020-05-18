@@ -3,10 +3,21 @@ import java.time.LocalDate;
 public abstract class Telefone {
 	private String numeroTelefone;
 	private String nomeUsuario;
-	private LocalDate dataInstalacao;
+	protected LocalDate dataInstalacao;  // para exemplificar diferença entre protected e private
 	private String enderecoInstalacao;
 	
+	public Telefone() {
+		
+	}
 	
+	public Telefone(String numero, String nomeUsuario, LocalDate data, String endereco) {
+		super();
+		this.setNumeroTelefone(numero);
+		this.setNomeUsuario(nomeUsuario);
+		this.setDataInstalacao(data);
+		this.setEnderecoInstalacao(endereco);
+	}
+
 	public abstract double getValorBasico();
 	
 	public String getNumeroTelefone() {
@@ -36,7 +47,5 @@ public abstract class Telefone {
 	public void setEnderecoInstalacao(String enderecoInstalacao) {
 		this.enderecoInstalacao = enderecoInstalacao;
 	}
-	
-	
 	
 }
