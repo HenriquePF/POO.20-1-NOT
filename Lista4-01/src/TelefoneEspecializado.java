@@ -31,4 +31,13 @@ public class TelefoneEspecializado extends Telefone{
 		return 187.82;
 	}
 
+	public String exibir() {  // Giancarlo
+        String msg = "";
+        msg="Nome: "+ this.getNomeUsuario();
+        msg+="\nEndereço: " + this.getEnderecoInstalacao();
+        msg+="\nTelefone: " + this.getNumeroTelefone();
+        msg+="\nData de Instalação: " + this.getDataInstalacao();
+        msg+="\nQtde Ocorrências: " + this.getQtdOcorrencias();
+        return msg;
+    }	
 }

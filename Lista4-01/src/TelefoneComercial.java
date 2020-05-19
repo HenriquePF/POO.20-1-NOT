@@ -29,5 +29,12 @@ public class TelefoneComercial extends Telefone {
 			return 37.50;
 		}
 	}
+	
+	public String exibir() { // Gustavo
+        return "Informações do Telefone = " + "\nEndereço - " + this.getEnderecoInstalacao() + "\nData instalação - "
+                + this.getDataInstalacao() + "\nNome do cliente - " + this.getNomeUsuario() 
+                + "\nTelefone - " + this.getNumeroTelefone()
+                + "\nRamo de Atividade - " + this.getRamoAtividade();
+    }
 
 }

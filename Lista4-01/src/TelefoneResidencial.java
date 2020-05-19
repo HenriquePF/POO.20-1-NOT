@@ -26,4 +26,20 @@ public class TelefoneResidencial extends Telefone{
 	public double getValorBasico() {
 		return 15;
 	}
+	
+	public String exibir(){  // Vitor
+        String str= "Nome do usuário: "+this.getNomeUsuario()
+                +"\nNumero do telefone: "+this.getNumeroTelefone()
+                +"\nEndereco: "+this.getEnderecoInstalacao()
+                +"\nData de instalação:"+this.getDataInstalacao()
+                +"\nConexão com internet:";
+        if (this.isConexaoInternet()) {
+        	str += "Sim";
+        }
+        else {
+        	str += "Não";
+        }
+        return str;
+                //+(this.isConexaoInternet()?"Sim":"Nao");
+    }
 }

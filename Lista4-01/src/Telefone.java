@@ -18,6 +18,7 @@ public abstract class Telefone {
 		this.setEnderecoInstalacao(endereco);
 	}
 
+	public abstract String exibir();
 	public abstract double getValorBasico();
 	
 	public String getNumeroTelefone() {
