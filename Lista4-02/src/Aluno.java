@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
 
-public abstract class Aluno {
+public abstract class Aluno implements Comparable<Aluno> {
 	private String nome;
 	private LocalDate dataNascimento;
 	
@@ -43,5 +43,36 @@ public abstract class Aluno {
 		this.dataNascimento = dataNascimento;
 	}
 	
+	/*
+	public int compareTo(Aluno outro) {
+	// se a ordem fosse por idade (crescente)
+		return this.idade - outro.getIdade();
+		
+		if (this.getIdade() > outro.getIdade()) {
+			return 10;
+		}
+		if (this.getIdade() == outro.getIdade()) {
+			return 0;
+		}
+		return -10;
+		
+	}
+	*/
 	
+	
+	public int compareTo(Aluno outro) {
+		// ordem alfabética de nome
+		return this.nome.compareTo(outro.getNome());
+		/*
+		if (this.nome.compareTo(outro.getNome()) > 0 ) {
+			return 10;
+		}
+		else if (this.nome.compareTo(outro.getNome()) == 0) {
+			return 0;
+		}
+		else {
+			return -10;
+		}
+		*/
+	}
 }

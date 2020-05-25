@@ -1,11 +1,11 @@
 import java.time.LocalDate;
 
 public class AlunoUniversitario extends Aluno{
-	private char formaIngresso;
+	private FormaDeIngresso formaIngresso;
 	private Curso curso;
 	
 	public AlunoUniversitario(String nome, LocalDate dataNascimento, 
-								char forma, Curso curso) {
+								FormaDeIngresso forma, Curso curso) {
 		super(nome, dataNascimento);
 		this.setFormaIngresso(forma);
 		this.setCurso(curso);
@@ -17,21 +17,35 @@ public class AlunoUniversitario extends Aluno{
 		super.finalize();
 	}
 	
-	public char getFormaIngresso() {
-		return formaIngresso;
+	/*
+	public String getFormaIngresso() {
+		switch (this.formaIngresso) {
+		case 'V': return "Vestibular";
+		case 'E': return "ENEM";		
+		case 'S': return "Seletivo especial";		
+		case 'T': return "Transferência externa";
+		case 'I': return "Transferência interna";
+		default: return "Indeterminado";
+		}
+    }
+
+    public void setFormaIngresso(char formaIngresso) {
+    	String v = String.valueOf(formaIngresso);
+        if ("VESTI".contains(v)) {
+        	this.formaIngresso = formaIngresso;
+        }
+        else
+        	throw new IllegalArgumentException("Forma de ingresso só pode ser V|E|S|T|I");
+    }
+*/
+	
+	public String getFormaIngresso() {
+		return formaIngresso.getDescricao();
 	}
-	public void setFormaIngresso(char formaIngresso) {
-		if (formaIngresso == 'V'
-			|| formaIngresso == 'E'
-			|| formaIngresso == 'S'
-			|| formaIngresso == 'T'
-			|| formaIngresso == 'I') {
+	public void setFormaIngresso(FormaDeIngresso formaIngresso) {
 			this.formaIngresso = formaIngresso;
-		}
-		else {
-			throw new IllegalArgumentException("Ingresso: V,E,S,T,I");
-		}
 	}
+	
 	public Curso getCurso() {
 		return curso;
 	}

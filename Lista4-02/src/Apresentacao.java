@@ -116,8 +116,7 @@ public class Apresentacao extends javax.swing.JFrame {
 		jTextArea1.setRows(5);
 		jScrollPane1.setViewportView(jTextArea1);
 
-		jComboBox3.setModel(new DefaultComboBoxModel(new String[] { "Vestibular", "ENEM", "Seletivo especial",
-				"Transf. Externa", "Interna Transfer\u00EAncia" }));
+		jComboBox3.setModel(new DefaultComboBoxModel(FormaDeIngresso.values()));
 
 		jLabel5 = new JLabel("Ingresso por:");
 
@@ -194,7 +193,7 @@ public class Apresentacao extends javax.swing.JFrame {
 		try {
 			if (jComboBox1.getSelectedIndex() == 0) { // AlunoUniversitário
 				Curso curso = cursos.get(jTextField3.getText().toUpperCase());
-				char forma = ((String) jComboBox3.getSelectedItem()).charAt(0);
+				FormaDeIngresso forma = ((FormaDeIngresso) jComboBox3.getSelectedItem());
 				aluno = new AlunoUniversitario(jTextField1.getText(), LocalDate.parse(jTextField2.getText(), formatter),
 						forma, curso);
 			} else { // AlunoEnsinoMedio
@@ -209,8 +208,9 @@ public class Apresentacao extends javax.swing.JFrame {
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
 		jTextArea1.setText("Lista dos alunos\n\n");
+		matriculados.sort(null);
 		for (Aluno a: matriculados) {
-			jTextArea1.append(a.mostra()+"\n");
+			jTextArea1.append(a.mostra()+"\n");  // polimórfico
 		}
 	}
 
