@@ -39,7 +39,7 @@ public class Apresentacao extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -197,15 +197,58 @@ public class Apresentacao extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+    	Evento e;
+    	if (jTextField4.getText().isEmpty() && jTextField5.getText().isEmpty()) {
+    		e = new Evento(jTextField1.getText(),
+    						Float.parseFloat(jTextField2.getText()),
+    						LocalDate.parse(jTextField3.getText(),formatter));
+    	}
+    	else {
+    		e = new ShowMusical(jTextField1.getText(),
+					Float.parseFloat(jTextField2.getText()),
+					LocalDate.parse(jTextField3.getText(),formatter),
+					jTextField4.getText(),
+					jTextField5.getText());
+    	}
+    	jComboBox1.addItem(e);
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+    	Evento evSelecionado = (Evento)jComboBox1.getSelectedItem();
+    	String str;
+    	if (evSelecionado != null) {
+    		if (evSelecionado.isAvaliado()) {
+    			if (JOptionPane.showConfirmDialog(this, "Avaliação já realizada. Quer sobrescrever a avaliação?") == JOptionPane.OK_OPTION) {    		
+    				Avaliacao a = new Avaliacao(Integer.parseInt(jTextField6.getText()),
+    						jTextField7.getText());
+    				evSelecionado.setAvaliacaoRealizada(a);
+    				str = "Avaliação sobrescrita";
+    			}
+    			else {
+    				str = "Permaneceu a avaliação anterior";
+    			}
+    		}
+    		else {
+				Avaliacao a = new Avaliacao(Integer.parseInt(jTextField6.getText()),
+						jTextField7.getText());
+				evSelecionado.setAvaliacaoRealizada(a);
+				str = "Avaliação cadastrada";
+    		}
+    	}
+    	else {
+    		str = "Selecione um evento antes de avaliar";
+    	}
+    	JOptionPane.showMessageDialog(this,str);
     }
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
- 
+    	String str = "Eventos cadastrados\n";
+    	Evento e;
+    	for (int i=0; i < jComboBox1.getItemCount();i++) {
+    		e = jComboBox1.getModel().getElementAt(i);
+    		str+="\n"+e.exibir();
+    	}
+    	JOptionPane.showMessageDialog(this, str);
     }
 
     /**
@@ -223,7 +266,7 @@ public class Apresentacao extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox<Evento> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
